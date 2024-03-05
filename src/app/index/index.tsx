@@ -1,6 +1,7 @@
 import { View, Text } from "react-native";
 
 import { styles } from "./styles";
+import { Ingredient } from "@/components/Ingredient";
 
 export default function Index() {
   return (
@@ -15,7 +16,7 @@ export default function Index() {
         Descubra receitas baseadas nos produtos que você escolheu
       </Text>
 
-
+      <Ingredient></Ingredient>
     </View>
   );
 }
