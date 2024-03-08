@@ -52,6 +52,7 @@ export default function Index() {
         ))}
       </ScrollView>
 
+
       {selected.length > 0 && (
         <Selected
           quantity={selected.length}
