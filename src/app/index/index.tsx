@@ -1,20 +1,29 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, Alert } from "react-native";
 
 import { styles } from "./styles";
 
 import { Ingredient } from "@/components/Ingredient";
+import { Selected } from "@/components/Selected";
+
 import { useState } from "react";
 
 export default function Index() {
-  const [selected, setSelected] = useState<string[]>([])
-  
+  const [selected, setSelected] = useState<string[]>([]);
+
   function handleToggleSelected(value: string) {
-    if(selected.includes(value)) {
-      return setSelected((state) => state.filter((item) => item !== value))
+    if (selected.includes(value)) {
+      return setSelected((state) => state.filter((item) => item !== value));
     }
 
-    setSelected((state) => [...state, value]) 
-    console.log(selected)
+    setSelected((state) => [...state, value]);
+    console.log(selected);
+  }
+
+  function handleClearSelected() {
+    Alert.alert("Limpar", "Deseja limpar tudo?", [
+      { text: "Não", style: "cancel" },
+      { text: "Sim", onPress: () => setSelected([]) },
+    ]);
   }
 
   return (
@@ -28,13 +37,29 @@ export default function Index() {
         Descubra receitas baseadas nos produtos que você escolheu
       </Text>
 
-      <ScrollView contentContainerStyle={styles.ingredients} showsVerticalScrollIndicator={false} >
-        {
-          Array.from({ length: 100 }).map((item, index) => (
-            <Ingredient key={index} name="Tomate" image="" selected={selected.includes(String(index))} onPress={() => handleToggleSelected(String(index))} />
-          ))
-        }
+      <ScrollView
+        contentContainerStyle={styles.ingredients}
+        showsVerticalScrollIndicator={false}
+      >
+        {Array.from({ length: 100 }).map((item, index) => (
+          <Ingredient
+            key={index}
+            name="Tomate"
+            image=""
+            selected={selected.includes(String(index))}
+            onPress={() => handleToggleSelected(String(index))}
+          />
+        ))}
       </ScrollView>
+
+      {selected.length > 0 && (
+        <Selected
+          quantity={selected.length}
+          onClear={handleClearSelected}
+          onSearch={() => {}}
+          />
+          )
+        }
     </View>
   );
 }
