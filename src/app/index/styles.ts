@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
     marginBottom: 38,
     color: theme.colors.gray_400,
   },
-  ingredients: {
+  ingredient: {
     flexWrap: "wrap",
     flexDirection: "row",
     paddingBottom: 200,
